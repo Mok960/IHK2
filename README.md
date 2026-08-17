@@ -1,28 +1,26 @@
 # MINT-Ferienwoche Aurora
 
-Dunkles Labor-Tagebuch mit Pastellfarben. Next.js, PostgreSQL und Drizzle.
+Dunkles Labor-Tagebuch mit Pastellfarben. Next.js, Netlify Database und Drizzle.
 
 ## Lokal starten
 
 ```bash
 npm install
-npx drizzle-kit push
-npm run dev
+netlify dev --port 8889
 ```
 
-`.env` Beispiel:
+Für den Admin-Login müssen diese Umgebungsvariablen gesetzt werden:
 
 ```
-DATABASE_URL=postgresql://USER:PASS@HOST:5432/DB
-AUTH_USERNAME=Mok960
-AUTH_PASSWORD=12345678
+AUTH_USERNAME=...
+AUTH_PASSWORD=...
 ```
 
-Login: **Mok960** / **12345678**
+Eine Datenbank-Verbindungszeichenfolge ist nicht erforderlich. Netlify Database wird automatisch bereitgestellt.
 
-## Als Website über GitHub hosten
+## Über Netlify veröffentlichen
 
-GitHub Pages kann keine Datenbank und keine Server-Actions ausführen. Deshalb so veröffentlichen:
+Das Repository mit einer Netlify-Site verbinden und die Login-Variablen unter **Site configuration → Environment variables** setzen. Beim Deploy werden die Migrationen aus `netlify/database/migrations` automatisch angewendet.
 
 ### 1. Code zu GitHub
 
@@ -37,24 +35,6 @@ git remote add origin https://github.com/DEIN-NAME/DEIN-REPO.git
 git push -u origin main
 ```
 
-### 2. Kostenlos bei Vercel verbinden
+### 2. Eigene Domain (optional)
 
-1. Auf [vercel.com](https://vercel.com) mit GitHub einloggen
-2. **Add New Project** und das Repository wählen
-3. Eine kostenlose Postgres-Datenbank anlegen (Vercel Postgres, Neon oder Supabase)
-4. Environment Variable setzen: `DATABASE_URL`
-5. Deploy
-
-Die Seite bekommt dann eine Adresse wie `https://dein-projekt.vercel.app`.
-
-Nach dem ersten Deploy im Projektordner einmal das Schema anlegen:
-
-```bash
-npx drizzle-kit push
-```
-
-oder in der Vercel-Datenbank dieselben Tabellen erzeugen.
-
-### 3. Eigene Domain (optional)
-
-In Vercel unter **Domains** eine eigene Domain verbinden.
+In Netlify unter **Domain management** eine eigene Domain verbinden.
