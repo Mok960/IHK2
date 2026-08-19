@@ -62,11 +62,17 @@ export async function getSession() {
   return user ? { username: user } : null;
 }
 
-export async function requireUser(nextPath = "/") {
+export type Session = { username: string } | null;
+
+export function requireUser(): Promise<Session>;
+export function requireUser(nextPath: string): Promise<Session>;
+export async function requireUser(nextPath?: string | undefined) {
+  const next = typeof nextPath === "string" ? nextPath : "/";
+
   const session = await getSession();
   if (!session) {
     // redirect to login with next
-    const encoded = encodeURIComponent(nextPath || "/");
+    const encoded = encodeURIComponent(next || "/");
     redirect(`/anmelden?next=${encoded}`);
   }
   return session;

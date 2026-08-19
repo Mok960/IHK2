@@ -32,7 +32,7 @@ function readSponsor(formData: FormData) {
 }
 
 export async function createSponsor(formData: FormData) {
-  await requireUser(formData);
+  await requireUser();
   await db.insert(sponsors).values(readSponsor(formData));
   revalidatePath("/");
   revalidatePath("/sponsoren");
@@ -40,7 +40,7 @@ export async function createSponsor(formData: FormData) {
 }
 
 export async function updateSponsor(id: number, formData: FormData) {
-  await requireUser(formData);
+  await requireUser();
   await db.update(sponsors).set(readSponsor(formData)).where(eq(sponsors.id, id));
   revalidatePath("/");
   revalidatePath("/sponsoren");
@@ -52,4 +52,5 @@ export async function deleteSponsor(id: number) {
   await db.delete(sponsors).where(eq(sponsors.id, id));
   revalidatePath("/");
   revalidatePath("/sponsoren");
+  redirect("/sponsoren");
 }
