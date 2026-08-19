@@ -56,7 +56,7 @@ function readEntry(formData: FormData) {
 }
 
 export async function createDiaryEntry(formData: FormData) {
-  await requireUser(formData);
+  await requireUser();
   const values = readEntry(formData);
   const [created] = await db.insert(diaryEntries).values(values).returning({
     id: diaryEntries.id,
@@ -68,7 +68,7 @@ export async function createDiaryEntry(formData: FormData) {
 }
 
 export async function updateDiaryEntry(id: number, formData: FormData) {
-  await requireUser(formData);
+  await requireUser();
   const values = readEntry(formData);
 
   await db

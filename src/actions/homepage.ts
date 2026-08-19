@@ -18,7 +18,7 @@ function asList(formData: FormData, key: string) {
 }
 
 export async function updateHomepage(formData: FormData) {
-  await requireUser(formData);
+  await requireUser();
 
   const id = Number(asString(formData.get("id")) || "1");
   const values = {
