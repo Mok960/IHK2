@@ -52,5 +52,4 @@ export async function deleteSponsor(id: number) {
   await db.delete(sponsors).where(eq(sponsors.id, id));
   revalidatePath("/");
   revalidatePath("/sponsoren");
-  redirect("/sponsoren");
 }
