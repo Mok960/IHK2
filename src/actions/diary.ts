@@ -14,7 +14,7 @@ function asString(value: FormDataEntryValue | null) {
 
 function asList(value: FormDataEntryValue | null) {
   return asString(value)
-    .split(/\r?\n|,/)
+    .split(/\r?\n|,/) 
     .map((item) => item.trim())
     .filter(Boolean);
 }
