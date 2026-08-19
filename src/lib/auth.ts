@@ -1,157 +1,89 @@
-import { createHmac, timingSafeEqual } from "node:crypto";
+import crypto from "crypto";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export const SESSION_COOKIE = "aurora_session";
+const SECRET = process.env.AUTH_SECRET || process.env.VERCEL_AUTH_SECRET || "dev-secret";
+const TOKEN_MAX_AGE = 60 * 60 * 24; // 1 day in seconds
 
-const SESSION_DAYS = 14;
-
-type SessionPayload = {
-  u: string;
-  e: number;
-};
-
-export const sessionCookieOptions = {
-  httpOnly: true,
-  sameSite: "none" as const,
-  secure: true,
-  partitioned: true,
-  path: "/",
-  maxAge: SESSION_DAYS * 24 * 60 * 60,
-};
-
-function authSecret() {
-  return process.env.AUTH_SECRET || "aurora-mint-ferienwoche-session-key-2026";
+function sign(payload: string) {
+  return crypto.createHmac("sha256", SECRET).update(payload).digest("hex");
 }
 
-function expectedUsername() {
-  return process.env.AUTH_USERNAME || "Mok960";
+function createToken(username: string) {
+  const payload = JSON.stringify({ u: username, iat: Date.now() });
+  const sig = sign(payload);
+  return Buffer.from(payload).toString("base64") + "." + sig;
 }
 
-function expectedPassword() {
-  return process.env.AUTH_PASSWORD || "12345678";
-}
-
-function sign(value: string) {
-  return createHmac("sha256", authSecret()).update(value).digest("base64url");
-}
-
-function safeEqual(left: string, right: string) {
-  const a = Buffer.from(left);
-  const b = Buffer.from(right);
-  if (a.length !== b.length) {
-    return false;
+function verifyToken(token?: string) {
+  if (!token) return null;
+  const parts = token.split(".");
+  if (parts.length !== 2) return null;
+  const payload = Buffer.from(parts[0], "base64").toString();
+  const sig = parts[1];
+  try {
+    if (sign(payload) !== sig) return null;
+    const obj = JSON.parse(payload);
+    if (!obj || typeof obj.u !== "string") return null;
+    // Optionally: check iat for expiry
+    return obj.u as string;
+  } catch (e) {
+    return null;
   }
-  return timingSafeEqual(a, b);
 }
 
 export function credentialsMatch(username: string, password: string) {
-  return username === expectedUsername() && password === expectedPassword();
-}
-
-export function createSessionToken(username: string) {
-  const payload: SessionPayload = {
-    u: username,
-    e: Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000,
-  };
-  const encoded = Buffer.from(JSON.stringify(payload), "utf8").toString(
-    "base64url",
+  return (
+    username === process.env.AUTH_USER &&
+    password === process.env.AUTH_PASS
   );
-  return `${encoded}.${sign(encoded)}`;
 }
 
-export function readSessionToken(token: string | undefined | null) {
-  if (!token) {
-    return null;
-  }
-
-  const [encoded, signature] = token.split(".");
-  if (!encoded || !signature || !safeEqual(sign(encoded), signature)) {
-    return null;
-  }
-
-  try {
-    const payload = JSON.parse(
-      Buffer.from(encoded, "base64url").toString("utf8"),
-    ) as SessionPayload;
-
-    if (!payload?.u || typeof payload.e !== "number" || payload.e < Date.now()) {
-      return null;
-    }
-
-    if (payload.u !== expectedUsername()) {
-      return null;
-    }
-
-    return { username: payload.u };
-  } catch {
-    return null;
-  }
+export async function setSession(username: string) {
+  const token = createToken(username);
+  cookies().set({
+    name: "session",
+    value: token,
+    httpOnly: true,
+    path: "/",
+    maxAge: TOKEN_MAX_AGE,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+  });
 }
 
-export function safeNextPath(value: string | null | undefined) {
-  const path = (value ?? "").trim();
-  if (
-    path === "/" ||
-    path === "/tagebuch" ||
-    path === "/tagebuch/neu" ||
-    path === "/sponsoren" ||
-    path === "/homepage/bearbeiten"
-  ) {
-    return path;
-  }
-
-  if (/^\/tagebuch\/\d+$/.test(path) || /^\/tagebuch\/\d+\/bearbeiten$/.test(path)) {
-    return path;
-  }
-
-  return "/";
-}
-
-export const ADMIN_TOKEN = "Mok960-ok";
-
-export function hasAdminToken(formData: FormData) {
-  return formData.get("adminToken") === ADMIN_TOKEN;
+export async function clearSession() {
+  cookies().set({ name: "session", value: "", httpOnly: true, path: "/", maxAge: 0, sameSite: "strict" });
 }
 
 export async function getSession() {
-  const jar = await cookies();
-  const signed = readSessionToken(jar.get(SESSION_COOKIE)?.value);
-  if (signed) {
-    return signed;
-  }
-
-  if (jar.get("aurora_admin")?.value === ADMIN_TOKEN) {
-    return { username: "Mok960" };
-  }
-
-  return null;
+  const token = cookies().get("session")?.value;
+  const user = verifyToken(token);
+  return user ? { username: user } : null;
 }
 
-export async function isLoggedIn() {
-  return Boolean(await getSession());
-}
-
-export async function requireUser(formData?: FormData) {
-  if (formData && hasAdminToken(formData)) {
-    return { username: "Mok960" };
-  }
-
+export async function requireUser(nextPath = "/") {
   const session = await getSession();
   if (!session) {
-    throw new Error("Nicht angemeldet");
+    // redirect to login with next
+    const encoded = encodeURIComponent(nextPath || "/");
+    redirect(`/anmelden?next=${encoded}`);
   }
   return session;
 }
 
-export async function setSession(username: string) {
-  const jar = await cookies();
-  jar.set(SESSION_COOKIE, createSessionToken(username), sessionCookieOptions);
+export async function isLoggedIn() {
+  const s = await getSession();
+  return Boolean(s);
 }
 
-export async function clearSession() {
-  const jar = await cookies();
-  jar.set(SESSION_COOKIE, "", {
-    ...sessionCookieOptions,
-    maxAge: 0,
-  });
+export function safeNextPath(p: string) {
+  if (!p) return "/";
+  try {
+    const u = new URL(p, "http://localhost");
+    if (!u.pathname.startsWith("/")) return "/";
+    return u.pathname + (u.search || "");
+  } catch (e) {
+    return "/";
+  }
 }

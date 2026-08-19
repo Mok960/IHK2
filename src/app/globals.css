@@ -26,7 +26,7 @@
   --color-aurora: var(--aurora);
   --color-mint: var(--mint);
   --color-lilac: var(--lilac);
-  --color-violet: var(--violet);
+  --color-violet: var(--color-violet);
   --color-amber: var(--amber);
   --color-peach: var(--peach);
   --color-sky: var(--sky);
@@ -156,3 +156,21 @@ select {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.4);
 }
+
+/* Accessibility tweaks: increase contrast for muted text and colored backgrounds */
+:root {
+  --muted: #d4cbe0; /* slightly lighter for better contrast */
+}
+
+.glass .text-muted {
+  color: var(--muted) !important;
+}
+
+/* Make sure colored utility classes used in components provide enough contrast */
+.bg-peach\/15 { background-color: rgba(255,194,178,0.28) !important; }
+.bg-mint\/15 { background-color: rgba(142,240,200,0.28) !important; }
+.bg-lilac\/15 { background-color: rgba(203,182,255,0.22) !important; }
+.bg-sky\/20 { background-color: rgba(159,217,255,0.22) !important; }
+
+/* Ensure headings and body text on cards stay high-contrast */
+.glass h1, .glass h2, .glass h3, .glass p { color: var(--ink); }
