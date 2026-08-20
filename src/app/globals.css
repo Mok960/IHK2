@@ -157,20 +157,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.4);
 }
 
-/* Colored backgrounds: Pink und Blau heller, Rest dunkel mit weißer Schrift */
-.bg-peach\/15 { background-color: #5c3d55 !important; color: #ffffff !important; }
-.bg-peach\/20 { background-color: #5c3d55 !important; color: #ffffff !important; }
-.bg-peach { background-color: #5c3d55 !important; color: #ffffff !important; }
-.bg-mint\/10 { background-color: #1f3b33 !important; color: #ffffff !important; }
-.bg-mint\/15 { background-color: #1f3b33 !important; color: #ffffff !important; }
-.bg-mint\/20 { background-color: #1f3b33 !important; color: #ffffff !important; }
-.bg-mint { background-color: #1f3b33 !important; color: #ffffff !important; }
+/* Colored backgrounds: Pink, mittleres Blau für Mint/Grün, Rest dunkel mit weißer Schrift */
+.bg-peach\/15 { background-color: #6a4860 !important; color: #ffffff !important; }
+.bg-peach\/20 { background-color: #6a4860 !important; color: #ffffff !important; }
+.bg-peach { background-color: #6a4860 !important; color: #ffffff !important; }
+.bg-mint\/10 { background-color: #3a5570 !important; color: #ffffff !important; }
+.bg-mint\/15 { background-color: #3a5570 !important; color: #ffffff !important; }
+.bg-mint\/20 { background-color: #3a5570 !important; color: #ffffff !important; }
+.bg-mint { background-color: #3a5570 !important; color: #ffffff !important; }
 .bg-lilac\/15 { background-color: #352d3d !important; color: #ffffff !important; }
 .bg-sky\/20 { background-color: #3d5570 !important; color: #ffffff !important; }
 .bg-amber\/15 { background-color: #3d3620 !important; color: #ffffff !important; }
-.bg-aurora\/8 { background-color: #1f3b33 !important; color: #ffffff !important; }
-.bg-violet\/10 { background-color: #5c3d55 !important; color: #ffffff !important; }
-.bg-violet\/16 { background-color: #5c3d55 !important; color: #ffffff !important; }
+.bg-aurora\/8 { background-color: #3a5570 !important; color: #ffffff !important; }
+.bg-violet\/10 { background-color: #6a4860 !important; color: #ffffff !important; }
+.bg-violet\/16 { background-color: #6a4860 !important; color: #ffffff !important; }
 .bg-white\/8 { background-color: rgba(255,255,255,0.12) !important; }
 .bg-white\/5 { background-color: rgba(255,255,255,0.10) !important; }
 
