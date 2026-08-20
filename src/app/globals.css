@@ -4,7 +4,7 @@
   --bg: #120d18;
   --bg-soft: #1b1424;
   --ink: #f6eefe;
-  --muted: #b7a8c9;
+  --muted: #d4cbe0; /* slightly lighter for better contrast */
   --line: rgba(255, 214, 240, 0.12);
   --aurora: #8ef0c8;
   --mint: #8ef0c8;
@@ -94,6 +94,7 @@ select {
   color: white;
 }
 
+/* Keep .glass as dark translucent cards (original behavior) */
 .glass {
   background: linear-gradient(180deg, rgba(36, 26, 48, 0.86), rgba(22, 16, 30, 0.78));
   border: 1px solid var(--line);
@@ -138,6 +139,7 @@ select {
   animation: pulse-ring 2.6s ease-out infinite;
 }
 
+/* Keep form fields dark with light text (original) */
 .field {
   width: 100%;
   border-radius: 1rem;
@@ -157,7 +159,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.4);
 }
 
-/* Accessibility tweaks: increase contrast for muted text and colored backgrounds */
+/* Keep muted variable helpful on dark background */
 :root {
   --muted: #d4cbe0; /* slightly lighter for better contrast */
 }
@@ -166,27 +168,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: var(--muted) !important;
 }
 
-/* Make sure colored utility classes & inline usages provide enough contrast */
-.bg-peach\/15 { background-color: rgba(255,194,178,0.6) !important; }
-.bg-peach\/20 { background-color: rgba(255,194,178,0.6) !important; }
-.bg-peach { background-color: rgba(255,194,178,0.6) !important; }
-.bg-mint\/10 { background-color: rgba(142,240,200,0.48) !important; }
-.bg-mint\/15 { background-color: rgba(142,240,200,0.6) !important; }
-.bg-mint\/20 { background-color: rgba(142,240,200,0.6) !important; }
-.bg-mint { background-color: rgba(142,240,200,0.6) !important; }
-.bg-lilac\/15 { background-color: rgba(203,182,255,0.6) !important; }
-.bg-sky\/20 { background-color: rgba(159,217,255,0.6) !important; }
-.bg-amber\/15 { background-color: rgba(255,224,138,0.6) !important; }
-.bg-aurora\/8 { background-color: rgba(142,240,200,0.6) !important; }
-.bg-violet\/10 { background-color: rgba(203,182,255,0.6) !important; }
-.bg-violet\/16 { background-color: rgba(203,182,255,0.6) !important; }
-.bg-white\/8 { background-color: rgba(255,255,255,0.12) !important; }
-.bg-white\/5 { background-color: rgba(255,255,255,0.10) !important; }
+/* Make colored utility classes lighter (paler backgrounds) and set dark text only for those colored areas */
+.bg-peach\/15 { background-color: rgba(255,194,178,0.22) !important; color: #23162f !important; }
+.bg-peach\/20 { background-color: rgba(255,194,178,0.26) !important; color: #23162f !important; }
+.bg-peach { background-color: rgba(255,194,178,0.26) !important; color: #23162f !important; }
+.bg-mint\/10 { background-color: rgba(142,240,200,0.20) !important; color: #23162f !important; }
+.bg-mint\/15 { background-color: rgba(142,240,200,0.24) !important; color: #23162f !important; }
+.bg-mint\/20 { background-color: rgba(142,240,200,0.26) !important; color: #23162f !important; }
+.bg-mint { background-color: rgba(142,240,200,0.26) !important; color: #23162f !important; }
+.bg-lilac\/15 { background-color: rgba(203,182,255,0.22) !important; color: #23162f !important; }
+.bg-sky\/20 { background-color: rgba(159,217,255,0.22) !important; color: #23162f !important; }
+.bg-amber\/15 { background-color: rgba(255,224,138,0.22) !important; color: #23162f !important; }
+.bg-aurora\/8 { background-color: rgba(142,240,200,0.18) !important; color: #23162f !important; }
+.bg-violet\/10 { background-color: rgba(203,182,255,0.22) !important; color: #23162f !important; }
+.bg-violet\/16 { background-color: rgba(203,182,255,0.22) !important; color: #23162f !important; }
+.bg-white\/8 { background-color: rgba(255,255,255,0.92) !important; color: #23162f !important; }
+.bg-white\/5 { background-color: rgba(255,255,255,0.96) !important; color: #23162f !important; }
 
-/* Inline gradients: darker stops for better overlay contrast */
+/* Inline gradients: paler stops for a lighter look, but don't force text color here */
 .bg-gradient-dark-cta {
-  background-image: linear-gradient(135deg, rgba(203,182,255,0.3), rgba(255,194,182,0.3) 50%, rgba(142,240,200,0.22));
+  background-image: linear-gradient(135deg, rgba(203,182,255,0.18), rgba(255,194,182,0.18) 50%, rgba(142,240,200,0.14));
 }
 
-/* Ensure headings and body text on cards stay high-contrast */
+/* Ensure headings and body text on cards stay high-contrast (light text on dark glass) */
 .glass h1, .glass h2, .glass h3, .glass p { color: var(--ink); }
