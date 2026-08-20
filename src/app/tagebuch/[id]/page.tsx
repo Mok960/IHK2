@@ -92,7 +92,7 @@ export default async function DiaryDetailPage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="grid gap-6 bg-white/80 p-6 md:grid-cols-[1.4fr_0.8fr] md:p-8">
+        <div className="tagebuch-description-container grid gap-6 p-6 md:grid-cols-[1.4fr_0.8fr] md:p-8">
           <div>
             <p className="text-xs tracking-[0.22em] text-muted uppercase">
               Beschreibung
