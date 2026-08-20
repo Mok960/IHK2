@@ -41,7 +41,9 @@ export function credentialsMatch(username: string, password: string) {
 
 export async function setSession(username: string) {
   const token = createToken(username);
-  cookies().set({
+  const cookieStore = await cookies();
+
+  cookieStore.set({
     name: "session",
     value: token,
     httpOnly: true,
@@ -53,11 +55,13 @@ export async function setSession(username: string) {
 }
 
 export async function clearSession() {
-  cookies().set({ name: "session", value: "", httpOnly: true, path: "/", maxAge: 0, sameSite: "strict" });
+  const cookieStore = await cookies();
+  cookieStore.set({ name: "session", value: "", httpOnly: true, path: "/", maxAge: 0, sameSite: "strict" });
 }
 
 export async function getSession() {
-  const token = cookies().get("session")?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("session")?.value;
   const user = verifyToken(token);
   return user ? { username: user } : null;
 }
