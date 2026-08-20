@@ -157,31 +157,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.4);
 }
 
-/* Accessibility tweaks: increase contrast for muted text and colored backgrounds */
-:root {
-  --muted: #d4cbe0; /* slightly lighter for better contrast */
-}
-
-.glass .text-muted {
-  color: var(--muted) !important;
-}
-
-/* Make sure colored utility classes & inline usages provide enough contrast */
-.bg-peach\/15 { background-color: rgba(255,194,178,0.6) !important; }
-.bg-peach\/20 { background-color: rgba(255,194,178,0.6) !important; }
-.bg-peach { background-color: rgba(255,194,178,0.6) !important; }
-.bg-mint\/10 { background-color: rgba(142,240,200,0.48) !important; }
-.bg-mint\/15 { background-color: rgba(142,240,200,0.6) !important; }
-.bg-mint\/20 { background-color: rgba(142,240,200,0.6) !important; }
-.bg-mint { background-color: rgba(142,240,200,0.6) !important; }
-.bg-lilac\/15 { background-color: rgba(203,182,255,0.6) !important; }
-.bg-sky\/20 { background-color: rgba(159,217,255,0.6) !important; }
-.bg-amber\/15 { background-color: rgba(255,224,138,0.6) !important; }
-.bg-aurora\/8 { background-color: rgba(142,240,200,0.6) !important; }
-.bg-violet\/10 { background-color: rgba(203,182,255,0.6) !important; }
-.bg-violet\/16 { background-color: rgba(203,182,255,0.6) !important; }
+/* Colored backgrounds: very dark with white text */
+.bg-peach\/15 { background-color: #1a0f15 !important; color: #ffffff !important; }
+.bg-peach\/20 { background-color: #1a0f15 !important; color: #ffffff !important; }
+.bg-peach { background-color: #1a0f15 !important; color: #ffffff !important; }
+.bg-mint\/10 { background-color: #0d1a15 !important; color: #ffffff !important; }
+.bg-mint\/15 { background-color: #0d1a15 !important; color: #ffffff !important; }
+.bg-mint\/20 { background-color: #0d1a15 !important; color: #ffffff !important; }
+.bg-mint { background-color: #0d1a15 !important; color: #ffffff !important; }
+.bg-lilac\/15 { background-color: #15100d !important; color: #ffffff !important; }
+.bg-sky\/20 { background-color: #0f1519 !important; color: #ffffff !important; }
+.bg-amber\/15 { background-color: #19150b !important; color: #ffffff !important; }
+.bg-aurora\/8 { background-color: #0d1a15 !important; color: #ffffff !important; }
+.bg-violet\/10 { background-color: #15100d !important; color: #ffffff !important; }
+.bg-violet\/16 { background-color: #15100d !important; color: #ffffff !important; }
 .bg-white\/8 { background-color: rgba(255,255,255,0.12) !important; }
 .bg-white\/5 { background-color: rgba(255,255,255,0.10) !important; }
+
+/* Ensure text in colored areas is white */
+.bg-peach\/15 *, .bg-peach\/20 *, .bg-peach *, 
+.bg-mint\/10 *, .bg-mint\/15 *, .bg-mint\/20 *, .bg-mint *,
+.bg-lilac\/15 *, .bg-sky\/20 *, .bg-amber\/15 *, 
+.bg-aurora\/8 *, .bg-violet\/10 *, .bg-violet\/16 * {
+  color: #ffffff !important;
+}
 
 /* Inline gradients: darker stops for better overlay contrast */
 .bg-gradient-dark-cta {
