@@ -169,8 +169,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Make sure colored utility classes & inline usages provide enough contrast */
 .bg-peach\/15 { background-color: rgba(255,194,178,0.6) !important; }
 .bg-peach\/20 { background-color: rgba(255,194,178,0.6) !important; }
+.bg-peach { background-color: rgba(255,194,178,0.6) !important; }
+.bg-mint\/10 { background-color: rgba(142,240,200,0.48) !important; }
 .bg-mint\/15 { background-color: rgba(142,240,200,0.6) !important; }
 .bg-mint\/20 { background-color: rgba(142,240,200,0.6) !important; }
+.bg-mint { background-color: rgba(142,240,200,0.6) !important; }
 .bg-lilac\/15 { background-color: rgba(203,182,255,0.6) !important; }
 .bg-sky\/20 { background-color: rgba(159,217,255,0.6) !important; }
 .bg-amber\/15 { background-color: rgba(255,224,138,0.6) !important; }
@@ -178,7 +181,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .bg-violet\/10 { background-color: rgba(203,182,255,0.6) !important; }
 .bg-violet\/16 { background-color: rgba(203,182,255,0.6) !important; }
 .bg-white\/8 { background-color: rgba(255,255,255,0.12) !important; }
-.bg-white\/5 { background-color: rgba(255,255,255,0.1) !important; }
+.bg-white\/5 { background-color: rgba(255,255,255,0.10) !important; }
 
 /* Inline gradients: darker stops for better overlay contrast */
 .bg-gradient-dark-cta {
