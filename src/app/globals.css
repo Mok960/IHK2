@@ -166,11 +166,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: var(--muted) !important;
 }
 
-/* Make sure colored utility classes used in components provide enough contrast */
-.bg-peach\/15 { background-color: rgba(255,194,178,0.42) !important; }
-.bg-mint\/15 { background-color: rgba(142,240,200,0.42) !important; }
-.bg-lilac\/15 { background-color: rgba(203,182,255,0.38) !important; }
-.bg-sky\/20 { background-color: rgba(159,217,255,0.38) !important; }
+/* Make sure colored utility classes & inline usages provide enough contrast */
+.bg-peach\/15 { background-color: rgba(255,194,178,0.6) !important; }
+.bg-peach\/20 { background-color: rgba(255,194,178,0.6) !important; }
+.bg-peach { background-color: rgba(255,194,178,0.6) !important; }
+.bg-mint\/10 { background-color: rgba(142,240,200,0.48) !important; }
+.bg-mint\/15 { background-color: rgba(142,240,200,0.6) !important; }
+.bg-mint\/20 { background-color: rgba(142,240,200,0.6) !important; }
+.bg-mint { background-color: rgba(142,240,200,0.6) !important; }
+.bg-lilac\/15 { background-color: rgba(203,182,255,0.6) !important; }
+.bg-sky\/20 { background-color: rgba(159,217,255,0.6) !important; }
+.bg-amber\/15 { background-color: rgba(255,224,138,0.6) !important; }
+.bg-aurora\/8 { background-color: rgba(142,240,200,0.6) !important; }
+.bg-violet\/10 { background-color: rgba(203,182,255,0.6) !important; }
+.bg-violet\/16 { background-color: rgba(203,182,255,0.6) !important; }
+.bg-white\/8 { background-color: rgba(255,255,255,0.12) !important; }
+.bg-white\/5 { background-color: rgba(255,255,255,0.10) !important; }
+
+/* Inline gradients: darker stops for better overlay contrast */
+.bg-gradient-dark-cta {
+  background-image: linear-gradient(135deg, rgba(203,182,255,0.3), rgba(255,194,182,0.3) 50%, rgba(142,240,200,0.22));
+}
 
 /* Ensure headings and body text on cards stay high-contrast */
 .glass h1, .glass h2, .glass h3, .glass p { color: var(--ink); }
