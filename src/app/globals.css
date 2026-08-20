@@ -157,20 +157,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(1.4);
 }
 
-/* Colored backgrounds: very dark with white text */
-.bg-peach\/15 { background-color: #1a0f15 !important; color: #ffffff !important; }
-.bg-peach\/20 { background-color: #1a0f15 !important; color: #ffffff !important; }
-.bg-peach { background-color: #1a0f15 !important; color: #ffffff !important; }
-.bg-mint\/10 { background-color: #0d1a15 !important; color: #ffffff !important; }
-.bg-mint\/15 { background-color: #0d1a15 !important; color: #ffffff !important; }
-.bg-mint\/20 { background-color: #0d1a15 !important; color: #ffffff !important; }
-.bg-mint { background-color: #0d1a15 !important; color: #ffffff !important; }
-.bg-lilac\/15 { background-color: #15100d !important; color: #ffffff !important; }
-.bg-sky\/20 { background-color: #0f1519 !important; color: #ffffff !important; }
-.bg-amber\/15 { background-color: #19150b !important; color: #ffffff !important; }
-.bg-aurora\/8 { background-color: #0d1a15 !important; color: #ffffff !important; }
-.bg-violet\/10 { background-color: #15100d !important; color: #ffffff !important; }
-.bg-violet\/16 { background-color: #15100d !important; color: #ffffff !important; }
+/* Colored backgrounds: darker but visible with white text */
+.bg-peach\/15 { background-color: #2a1a15 !important; color: #ffffff !important; }
+.bg-peach\/20 { background-color: #2a1a15 !important; color: #ffffff !important; }
+.bg-peach { background-color: #2a1a15 !important; color: #ffffff !important; }
+.bg-mint\/10 { background-color: #1a2a23 !important; color: #ffffff !important; }
+.bg-mint\/15 { background-color: #1a2a23 !important; color: #ffffff !important; }
+.bg-mint\/20 { background-color: #1a2a23 !important; color: #ffffff !important; }
+.bg-mint { background-color: #1a2a23 !important; color: #ffffff !important; }
+.bg-lilac\/15 { background-color: #251f2a !important; color: #ffffff !important; }
+.bg-sky\/20 { background-color: #1a2330 !important; color: #ffffff !important; }
+.bg-amber\/15 { background-color: #2a2515 !important; color: #ffffff !important; }
+.bg-aurora\/8 { background-color: #1a2a23 !important; color: #ffffff !important; }
+.bg-violet\/10 { background-color: #251f2a !important; color: #ffffff !important; }
+.bg-violet\/16 { background-color: #251f2a !important; color: #ffffff !important; }
 .bg-white\/8 { background-color: rgba(255,255,255,0.12) !important; }
 .bg-white\/5 { background-color: rgba(255,255,255,0.10) !important; }
 
@@ -189,3 +189,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* Ensure headings and body text on cards stay high-contrast */
 .glass h1, .glass h2, .glass h3, .glass p { color: var(--ink); }
+
+/* Tagebuch entry description background - dunkler statt creme */
+.tagebuch-description-container { background-color: rgba(27, 20, 36, 0.95) !important; }
